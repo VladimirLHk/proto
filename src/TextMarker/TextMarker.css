@@ -1,0 +1,26 @@
+.textWrapper {
+    width: 445px;
+    height: 200px;
+    border: solid 1px gray;
+}
+
+.buttonSaveOrEdit {
+    display: block;
+}
+
+.textareaMain {
+    height: 150px;
+}
+
+.hidden {
+    display: none;
+}
+
+.markedTextWrapper {
+    height: 150px;
+    overflow: auto;
+    padding: 2px;
+    border: solid 1px #e2e2e2;
+    margin-bottom: 4px;
+
+}
