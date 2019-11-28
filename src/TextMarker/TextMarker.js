@@ -1,17 +1,17 @@
 import React from 'react';
 import './TextMarker.css';
-import FCMarker from "../FCMarker/FCMarker";
+import FCMarker from "../../garbage/FCMarker/FCMarker";
 
 const spanIdPrefix = 'spanText';
 const fcClassName = 'properNoun';
 const buttonName = ['Сохранить', 'Заменить'];
 
 const splitSeparators = '\n !,.:?";';
-const mathSymbs = '0123456789+-*/@#%^&';
+const mathSymbols = '0123456789+-*/@#%^&';
 const separatorsRegExp = new RegExp('(['+splitSeparators+'])');
 
 let isCapital = letter => {
-  return splitSeparators.indexOf(letter) === -1 && mathSymbs.indexOf(letter) === -1 && letter === letter.toUpperCase()
+  return splitSeparators.indexOf(letter) === -1 && mathSymbols.indexOf(letter) === -1 && letter === letter.toUpperCase()
 };
 
 let splitText = (text) => {

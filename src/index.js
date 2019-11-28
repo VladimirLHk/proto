@@ -1,11 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from "react-redux";
+import {createStore} from "redux";
+import complexReducer from "./Redux/reducers"
 import './index.css';
-import ExperimentFramework from './App';
-import TextMarker from "./TextMarker/TextMarker";
-
-const textText = 'God buy, my Little Baby! Do you love me? I love you! Mary Christmas!!!';
+import App from "./App";
 
 
-// ReactDOM.render(<ExperimentFramework />, document.getElementById('root'));
-ReactDOM.render(<TextMarker initText = {textText}/>, document.getElementById('root'));
+let store = createStore(complexReducer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App/>
+  </Provider>,
+  document.getElementById('root'));
