@@ -9,9 +9,8 @@ const NoteTextInput = ({text, className}) => {
       id="textarea"
       rows={'10'}
       cols={'60'}
-    >
-      {text}
-    </textarea>
+      defaultValue={text}
+    />
   )
 };
 

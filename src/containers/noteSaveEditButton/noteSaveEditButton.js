@@ -12,10 +12,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClick: (buttonState) => {
+    onClick: () => {
       let text = document.getElementById('textarea').value;
-      console.log('onClick', buttonState, text);
-      dispatch(noteButtonPressed({buttonState, text}))
+      dispatch(noteButtonPressed({text}))
     }
   }
 };

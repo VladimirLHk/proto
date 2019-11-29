@@ -47,7 +47,6 @@ const MarkedText = ({className, textBlocks}) => {
           return
         }
         let key = spanIdPrefix + index;
-        console.log(text, isCapital(text[0]));
         return <MarkedTextBlock
           key = {key}
           id = {key}
