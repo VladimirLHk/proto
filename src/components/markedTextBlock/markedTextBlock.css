@@ -1,0 +1,9 @@
+.properNoun {
+    background-color: aqua;
+    color: red;
+}
+
+.properNoun:hover {
+    cursor: pointer;
+    background-color: aquamarine;
+}
