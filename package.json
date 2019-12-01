@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "fs": "0.0.1-security",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.0",
     "prop-types": "^15.7.2",

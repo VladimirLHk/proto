@@ -17,7 +17,7 @@ const isCapital = letter => {
 const splitText = (text) => {
   let result = [];
   let buffer = [];
-  text.replace(/ /g, '\u00A0').split(separatorsRegExp).forEach(word => {
+  text.split(separatorsRegExp).forEach(word => {
     if (word.length > 0 && (word === '\n' || isCapital(word[0]))) {
       if (buffer.length > 0) {
         result.push(buffer.join(''));
@@ -31,27 +31,54 @@ const splitText = (text) => {
   if (buffer.length > 0) {
     result.push(buffer.join(''));
   }
-  if (result.length === 0) {
-    result.push('')
-  }
   return result
 };
 
+const makeMultiLineMarkedText = textBlocks => {
+  let result = [];
+  let line = [];
+  textBlocks.forEach((text) => {
+    //попалась пустышка
+    if (text.length === 0) {
+      return
+    }
+    //попался конец строки
+    if (text === '\n') {
+      result.push(line);
+      line = [];
+      return
+    }
+    line.push(text);
+  });
+  if (line.length > 0) {
+    result.push(line);
+  }
+  console.log(result);
+  return result;
+};
+
 const MarkedText = ({className, textBlocks}) => {
+  let linedText = makeMultiLineMarkedText(textBlocks);
   return (
     <div className={className}>
-      {textBlocks.map((text, index) => {
-        if (text.length === 0) {
-          return
-        }
-        let key = spanIdPrefix + index;
-        return <MarkedTextBlock
-          key = {key}
-          id = {key}
-          className = {isCapital(text[0]) ? fcClassName : ''}
-          text = {text}
-        />
-      })}
+        {linedText.map((line, index) => {
+          return (
+            <p className="lineBlock" key={'line' + index}>
+              {line.map((text, index) => {
+                if (text.length === 0) {
+                  return
+                }
+                let key = spanIdPrefix + index;
+                return <MarkedTextBlock
+                  key = {key}
+                  id = {key}
+                  className = {isCapital(text[0]) ? fcClassName : ''}
+                  text = {text}
+                />
+              })}
+            </p>
+          )
+        })}
     </div>
   )
 };

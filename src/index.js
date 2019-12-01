@@ -9,6 +9,9 @@ import {createStore} from "redux";
 import complexReducer from "./Redux/reducers"
 import './index.css';
 import App from "./App";
+import initialState from './data';
+const fs = require('fs');
+console.log(fs);
 
 
 let store = createStore(complexReducer);
@@ -18,3 +21,6 @@ ReactDOM.render(
     <App/>
   </Provider>,
   document.getElementById('root'));
+
+let a = {a:1, b:2, c:3};
+fs.writeFile('message.txt', a, 'utf8', (err) => {console.log(err)});
