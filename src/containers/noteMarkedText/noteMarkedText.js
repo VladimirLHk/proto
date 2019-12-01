@@ -2,6 +2,7 @@ import {connect} from 'react-redux';
 import React from "react";
 import MarkedTextBlock from "../../components/markedTextBlock/markedTextBlock";
 import './noteMarkedText.css'
+import testFunc from "../../TextLib/properNounFilter";
 
 const spanIdPrefix = 'spanText';
 const fcClassName = 'properNoun';
@@ -53,7 +54,7 @@ const makeMultiLineMarkedText = textBlocks => {
   if (line.length > 0) {
     result.push(line);
   }
-  console.log(result);
+  // console.log(result);
   return result;
 };
 
@@ -86,6 +87,7 @@ const MarkedText = ({className, textBlocks}) => {
 // className: "row markedTextWrapper" + (!state.buttonState ? " hidden" : ""),
 
 const mapStateToProps = (state) => {
+  console.log(testFunc(state.currentText));
   return {
     textBlocks: splitText(state.currentText),
     className: "row markedTextWrapper" + (!state.buttonState ? " hidden" : ""),
