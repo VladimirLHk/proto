@@ -1,4 +1,11 @@
-export const TEST_TEXT = 'God buy, my Little Baby! Do you love me? I love you! Mary Christmas!!!';
+export const TEST_TEXT = '1. Детство и воспитание  Владимир Дубровский остается без матери в раннем детстве: мать умирает вскоре после его рождения. В 8 лет отец отправляет Владимира в Петербург на учебу в Кадетский корпус, где Владимир получает воспитание и образование. ' +
+  '\n' +
+  '2. Служба в гвардии  Окончив Кадетский корпус, Владимир Дубровский поступает на службу в гвардейский полк. Юный Дубровский живет "на широкую ногу", роскошно и беззаботно. Отец ничего не жалеет для сына и посылает ему достаточно денег. Все эти годы сын и отец мало общаются друг с другом, но все равно любят друг друга.  \n' +
+  '\n' +
+  'Источник: https://www.literaturus.ru/2015/07/istorija-zhizni-vladimira-dubrovskogo-plan-pushkin.html\n' +
+  '© Literaturus.ru : Мир русской литературы';
+
+export const ENG_TEST_TEXT = 'God buy, my Little Baby! Do you love me? I love you! Mary Christmas!!!';
 
 export const NOTE_BUTTON_NAMES = {
   save_note: 'Сохранить',

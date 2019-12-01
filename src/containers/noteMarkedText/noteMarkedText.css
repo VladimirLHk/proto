@@ -4,4 +4,6 @@
     padding: 2px;
     border: solid 1px #e2e2e2;
     margin-bottom: 4px;
+    align-items: flex-start;
+    /*justify-content: left;*/
 }

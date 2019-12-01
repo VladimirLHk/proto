@@ -6,7 +6,7 @@ const MarkedTextBlock = ({text, id, className}) => {
   if (text === '\n') {
     return <br/>
   }
-  return (<span id = {id} className={className}>{text}</span>)
+  return (<span id = {id} className={"textBlock " + className}>{text}</span>)
 };
 
 MarkedTextBlock.propTypes = {

@@ -4,10 +4,11 @@ import './App.css';
 import NoteTextInputHandle from "./containers/noteTextInputHandle/noteTextInputHandle";
 import NoteMarkedText from "./containers/noteMarkedText/noteMarkedText";
 
+{/*<div className="textWrapper">*/}
 
 const App = ()=>{
   return(
-    <div className="textWrapper">
+    <div className="container">
       <NoteTextInputHandle/>
       <NoteMarkedText/>
       <NoteSaveEditButton/>

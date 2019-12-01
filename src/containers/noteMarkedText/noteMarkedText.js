@@ -6,7 +6,7 @@ import './noteMarkedText.css'
 const spanIdPrefix = 'spanText';
 const fcClassName = 'properNoun';
 
-const splitSeparators = '\n !,.:?";';
+const splitSeparators = '\n !,.:?";\u00A0';
 const mathSymbols = '0123456789+-*/@#%^&';
 const separatorsRegExp = new RegExp('(['+splitSeparators+'])');
 
@@ -17,7 +17,7 @@ const isCapital = letter => {
 const splitText = (text) => {
   let result = [];
   let buffer = [];
-  text.split(separatorsRegExp).forEach(word => {
+  text.replace(/ /g, '\u00A0').split(separatorsRegExp).forEach(word => {
     if (word.length > 0 && (word === '\n' || isCapital(word[0]))) {
       if (buffer.length > 0) {
         result.push(buffer.join(''));
@@ -36,8 +36,6 @@ const splitText = (text) => {
   }
   return result
 };
-
-// {"markedTextWrapper"+(!this.state.buttonNameIndex ? " hidden" : "")}
 
 const MarkedText = ({className, textBlocks}) => {
   return (
@@ -58,10 +56,12 @@ const MarkedText = ({className, textBlocks}) => {
   )
 };
 
+// className: "row markedTextWrapper" + (!state.buttonState ? " hidden" : ""),
+
 const mapStateToProps = (state) => {
   return {
     textBlocks: splitText(state.currentText),
-    className: "markedTextWrapper" + (!state.buttonState ? " hidden" : ""),
+    className: "row markedTextWrapper" + (!state.buttonState ? " hidden" : ""),
   }
 };
 
