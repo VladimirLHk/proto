@@ -2,10 +2,7 @@ import React from 'react';
 import PropType from 'prop-types';
 import './noteTextInput.css'
 
-
-// cols={'60'}
-
-const NoteTextInput = ({text, className}) => {
+const NoteTextInput = ({text, className = "row textareaMain"}) => {
   return (
     <textarea
       className={className}
@@ -18,7 +15,7 @@ const NoteTextInput = ({text, className}) => {
 
 NoteTextInput.propTypes = {
   text: PropType.string.isRequired,
-  className: PropType.string.isRequired,
+  className: PropType.string,
 };
 
 export default NoteTextInput;

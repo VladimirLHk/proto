@@ -8,25 +8,6 @@ const isCapital = letter => {
 };
 
 //
-const splitText = (text) => {
-  let result = [];
-  let buffer = [];
-  text.split(separatorsRegExp).forEach(word => {
-    if (word.length > 0 && (word === '\n' || isCapital(word[0]))) {
-      if (buffer.length > 0) {
-        result.push(buffer.join(''));
-        buffer = [];
-      }
-      result.push(word)
-    } else {
-      buffer.push(word)
-    }
-  });
-  if (buffer.length > 0) {
-    result.push(buffer.join(''));
-  }
-  return result
-};
 
 const isTheSameType = (isCandidate, word) => {
   return word.length === 0 || (isCandidate ?
@@ -67,8 +48,8 @@ export default text => {
       buffer: []
     });
 
-  result.push(makeTextNode(isCandidate, buffer))
-  console.log (result, buffer);
+  result.push(makeTextNode(isCandidate, buffer));
+  // console.log (result, buffer);
   return result
 
 };

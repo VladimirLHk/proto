@@ -1,11 +1,10 @@
 import {connect} from 'react-redux';
 import noteTextInput from "../../components/noteTextInput/noteTextInput";
+import getTextFromBlocks from "../../TextLib/getTextFromBlocks";
 
-// className: "textareaMain" + (state.buttonState ? " hidden" : ""),
 const mapStateToProps = (state) => {
   return {
-    text: state.currentText,
-    className: "row textareaMain" + (state.buttonState ? " hidden" : ""),
+    text: getTextFromBlocks(state.currentText),
   }
 };
 
