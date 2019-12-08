@@ -10,12 +10,27 @@ import bodyParser from 'body-parser';
 import PostController from './Controllers/PostController';
 const PostOperator = new PostController();
 import TextController from './Controllers/FileController';
+import cors from 'cors';
+import fs from 'fs';
+import https from 'https';
+
+// let options = {
+//   key: fs.readFileSync('server-key.pem'),
+//   cert: fs.readFileSync('server-cert.pem'),
+//   requestCert: true
+// };
+// let server = https.createServer(options, app);
+// server.listen(3333, () =>
+//   console.log(`Listening on port 3333`)
+// );
+
 
 const app = express();
-mongoose.connect('mongodb://localhost/blog');
+// mongoose.connect('mongodb://localhost/blog');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
 app.post('/file', TextController);
 app.get('/posts', PostOperator.index);
@@ -26,6 +41,9 @@ app.put('/posts/:id', PostOperator.update);
 
 app.listen(3333, () =>
   console.log(`Listening on port 3333`));
+
+
+
 
 
 //

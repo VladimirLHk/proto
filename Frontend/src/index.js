@@ -5,12 +5,16 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
-import {createStore} from "redux";
+import {createStore, applyMiddleware } from "redux";
+import thunkMiddleware from 'redux-thunk';
 import complexReducer from "./Redux/reducers"
 import './index.css';
 import App from "./App";
 
-let store = createStore(complexReducer);
+let store = createStore(
+  complexReducer,
+  applyMiddleware(thunkMiddleware)
+  );
 
 ReactDOM.render(
   <Provider store={store}>
