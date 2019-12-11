@@ -3,22 +3,42 @@ import NoteSaveEditButton from "./containers/noteSaveEditButton/noteSaveEditButt
 import './App.css';
 import NoteTextInputHandle from "./containers/noteTextInputHandle/noteTextInputHandle";
 import NoteMarkedText from "./containers/noteMarkedText/noteMarkedText";
+import {loadLexicon} from "./Redux/actions";
 import {connect} from "react-redux";
 
-{/*<div className="textWrapper">*/}
+class AppCard extends React.Component {
 
-const AppCard = ({isEdit})=>{
-  return(
-    <div className="container">
-      {!isEdit && <NoteTextInputHandle/>}
-      {isEdit && <NoteMarkedText/>}
-      <NoteSaveEditButton/>
-    </div>
+  componentDidMount() {
+    console.log("component App DidMount: ", this.props);
+    this.props.loadLexicon();
+  }
+
+  render() {
+    let {isEdit} = this.props;
+    return(
+      <div className="container">
+        {!isEdit && <NoteTextInputHandle/>}
+        {isEdit && <NoteMarkedText/>}
+        <NoteSaveEditButton/>
+      </div>
     )
-};
+  }
+
+}
+
+// const AppCard = ({isEdit})=>{
+//   return(
+//     <div className="container">
+//       {!isEdit && <NoteTextInputHandle/>}
+//       {isEdit && <NoteMarkedText/>}
+//       <NoteSaveEditButton/>
+//     </div>
+//     )
+// };
 
 const App = connect(
-  (state) => {return {isEdit: state.buttonState}}
+  (state) => {return {isEdit: state.buttonState}},
+  (dispatch) => {return {loadLexicon: () => dispatch(loadLexicon())}}
 )(AppCard);
 
 export default App;

@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch) => {
       if (textareaNode) {
         let text = textareaNode.value;
         dispatch(saveNoteButtonPressed({text}));
-        // dispatch(updateLexicon({text}));
         dispatch(updateLexiconEverywhere({text}));
       } else {
         dispatch(editNoteButtonPressed())

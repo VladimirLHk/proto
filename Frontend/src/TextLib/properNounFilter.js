@@ -8,7 +8,6 @@ const isCapital = letter => {
 };
 
 //
-
 const isTheSameType = (isCandidate, word) => {
   return word.length === 0 || (isCandidate ?
     (SPACE_SYMBOLS.indexOf(word) !== -1 || isCapital(word[0])) :
@@ -16,7 +15,7 @@ const isTheSameType = (isCandidate, word) => {
 };
 
 const checkAndCorrectBufferAndWord = (buffer, word) => {
-  while (buffer.length !== 0 && buffer[buffer.length-1].length === 0 || SPACE_SYMBOLS.indexOf(buffer[buffer.length-1]) !== -1 ){
+  while (buffer.length !== 0 && buffer[buffer.length-1].length === 0 || SPACE_SYMBOLS.indexOf(buffer[buffer.length-1]) !== -1){
     word = buffer.pop() + word;
   }
   return {buffer, word}
@@ -29,7 +28,6 @@ const makeTextNode = (isCandidate, buffer) => {
   }
 };
 
-// const makeProperNounCandidates = text => {
 export default text => {
   let {isCandidate, result, buffer} = text.split(separatorsRegExp).reduce(({isCandidate, result, buffer}, word) => {
     if (isTheSameType(isCandidate, word)) {
@@ -41,17 +39,14 @@ export default text => {
       isCandidate = !isCandidate
     }
     return {isCandidate, result, buffer}
-  },
-    {
-      isCandidate:false,
-      result: [],
-      buffer: []
-    });
+  }, {
+        isCandidate:false,
+        result: [],
+        buffer: []
+      });
 
   result.push(makeTextNode(isCandidate, buffer));
-  // console.log (result, buffer);
   return result
 
 };
 
-// export default makeProperNounCandidates

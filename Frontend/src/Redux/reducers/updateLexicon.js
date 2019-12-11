@@ -5,13 +5,12 @@ const initialState = new Set();
 
 export default (state = initialState, action) => {
   if (action.type === UPDATE_LEXICON) {
-    // console.log(state);
     let resultLexicon = new Set(state);
     getWords(action.text).forEach( word => {
       resultLexicon.add(word)
     });
+    console.log(resultLexicon);
     return resultLexicon
-    // return action.text
   }
 
   return state

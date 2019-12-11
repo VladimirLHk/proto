@@ -1,4 +1,4 @@
-import {EDIT_NOTE_BUTTON_PRESSED, NOTE_BUTTON_PRESSED, SAVE_NOTE_BUTTON_PRESSED} from "../actionsNames";
+import {EDIT_NOTE_BUTTON_PRESSED, SAVE_NOTE_BUTTON_PRESSED} from "../actionsNames";
 
 const initialState = false;
 

@@ -3,7 +3,7 @@
 # dependencies
 /node_modules
 /MongoDB
-/garbage
+/0 garbage
 /.pnp
 .pnp.js
 
