@@ -15,7 +15,7 @@ const isTheSameType = (isCandidate, word) => {
 };
 
 const checkAndCorrectBufferAndWord = (buffer, word) => {
-  while (buffer.length !== 0 && buffer[buffer.length-1].length === 0 || SPACE_SYMBOLS.indexOf(buffer[buffer.length-1]) !== -1){
+  while ((buffer.length !== 0 && buffer[buffer.length-1].length === 0) || SPACE_SYMBOLS.indexOf(buffer[buffer.length-1]) !== -1){
     word = buffer.pop() + word;
   }
   return {buffer, word}

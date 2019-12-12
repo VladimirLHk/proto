@@ -1,11 +1,15 @@
 import {connect} from 'react-redux';
 import React from "react";
 import MarkedTextBlock from "../../components/markedTextBlock/markedTextBlock";
-import './noteMarkedText.css'
+import './noteMarkedText.css';
 
 const spanIdPrefix = 'spanText';
 const fcClassName = 'properNoun';
+const cursorClassName = 'markedBlockCursor';
+const cursorSelector = 'span.' + cursorClassName;
 
+// TODO Вероятно, стоит перенести эту функцию из компонента:
+//  снять ответственность за разбиение на абзацы.
 const makeMultiLineMarkedText = textBlocks => {
   let result = [];
   let line = [];
@@ -36,35 +40,62 @@ const makeMultiLineMarkedText = textBlocks => {
   return result;
 };
 
+//TODO Это может быть компонент, который визуализирует текст, разбитым на блоки и позволяет перемещаться курсору по тексту
+// по каждому блоку, который есть в тексте или по определенному подмножетсву блоков;
+// Сюда надо передавать функцию, которая будет выдавать, учитывать ли очередной блок при вычислении значения,
+// с которым сравнивать переданный целевой номер курсора.
 
-const MarkedText = ({className = "row markedTextWrapper", textBlocks}) => {
-  let linedText = makeMultiLineMarkedText(textBlocks);
-  return (
-    <div className={className}>
+class MarkedText extends React.Component {
+  componentDidMount() {
+    this.scrollToCursor();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('from componentDidUpdate: ', prevProps, prevState, snapshot);
+    this.scrollToCursor();
+  }
+
+  scrollToCursor() {
+    let cursorElement = document.querySelector(cursorSelector);
+    cursorElement && cursorElement.scrollIntoView({ behavior: 'smooth',  block: "center" });
+  }
+
+  render () {
+    let {className = "row markedTextWrapper", textBlocks, cursorIndex} = this.props;
+    let linedText = makeMultiLineMarkedText(textBlocks);
+    let blockNum = -1;
+    return (
+      <div className={className}>
         {linedText.map((line, index) => {
           return (
             <p className="lineBlock" key={'line' + index}>
               {line.map(({text, questId}, index) => {
                 if (text.length === 0) {
-                  return
+                  return null
                 }
+                questId && blockNum++;
                 let key = spanIdPrefix + index;
                 return <MarkedTextBlock
                   key = {key}
                   id = {key}
-                  className = {questId ? fcClassName : ''}
+                  className = {questId ? (blockNum === cursorIndex ? cursorClassName : fcClassName) : ''}
                   text = {text}
                 />
               })}
             </p>
           )
         })}
-    </div>
-  )
-};
+      </div>
+    )
+  }
+}
 
 const NoteMarkedText = connect(
-  (state) => {return {textBlocks: state.currentText}}
+  (state) =>
+  {return {
+    textBlocks: state.currentText,
+    cursorIndex: state.cursorIndex,
+  }}
   )(MarkedText);
 
 export default NoteMarkedText;

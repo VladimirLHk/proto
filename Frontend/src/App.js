@@ -5,6 +5,7 @@ import NoteTextInputHandle from "./containers/noteTextInputHandle/noteTextInputH
 import NoteMarkedText from "./containers/noteMarkedText/noteMarkedText";
 import {loadLexicon} from "./Redux/actions";
 import {connect} from "react-redux";
+import MarkedTextBlockJumperGroup from "./containers/markedTextBlockJumper/markedTextBlockJumper";
 
 class AppCard extends React.Component {
 
@@ -20,21 +21,12 @@ class AppCard extends React.Component {
         {!isEdit && <NoteTextInputHandle/>}
         {isEdit && <NoteMarkedText/>}
         <NoteSaveEditButton/>
+        {isEdit && <MarkedTextBlockJumperGroup/>}
       </div>
     )
   }
 
 }
-
-// const AppCard = ({isEdit})=>{
-//   return(
-//     <div className="container">
-//       {!isEdit && <NoteTextInputHandle/>}
-//       {isEdit && <NoteMarkedText/>}
-//       <NoteSaveEditButton/>
-//     </div>
-//     )
-// };
 
 const App = connect(
   (state) => {return {isEdit: state.buttonState}},
