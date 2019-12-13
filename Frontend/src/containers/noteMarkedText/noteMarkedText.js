@@ -15,9 +15,9 @@ const makeMultiLineMarkedText = textBlocks => {
   let line = [];
   textBlocks.forEach(({text, questId}) => {
     //попалась пустышка
-    if (text.length === 0) {
-      return
-    }
+    // if (text.length === 0) {
+    //   return
+    // }
     //попался конец абзаца или несколько абзацев "без вопросов"
     if (text.indexOf('\n') !== -1) {
       let blockPerStatements = text.split('\n');
@@ -37,6 +37,7 @@ const makeMultiLineMarkedText = textBlocks => {
   if (line.length > 0) {
     result.push(line);
   }
+  console.log('lined: ', result);
   return result;
 };
 
@@ -63,6 +64,7 @@ class MarkedText extends React.Component {
   render () {
     let {className = "row markedTextWrapper", textBlocks, cursorIndex} = this.props;
     let linedText = makeMultiLineMarkedText(textBlocks);
+    // let linedText = [textBlocks];
     let blockNum = -1;
     return (
       <div className={className}>
@@ -70,10 +72,11 @@ class MarkedText extends React.Component {
           return (
             <p className="lineBlock" key={'line' + index}>
               {line.map(({text, questId}, index) => {
-                if (text.length === 0) {
-                  return null
-                }
+                // if (text.length === 0) {
+                //   return null
+                // }
                 questId && blockNum++;
+                blockNum === cursorIndex && console.log(text.codePointAt(0));
                 let key = spanIdPrefix + index;
                 return <MarkedTextBlock
                   key = {key}

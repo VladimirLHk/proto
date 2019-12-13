@@ -31,16 +31,17 @@ export const updateLexicon = ({text}) => {
   }
 };
 
-export const moveBlocksCursor = ({moving}) => {
-  console.log('moveBlocksCursor: ', moving);
+export const moveBlocksCursor = ({cursorIndex}) => {
+  // console.log('moveBlocksCursor: ', cursorIndex);
   return {
     type: MOVE_BLOCKS_CURSOR,
-    moving
+    cursorIndex
   }
 };
 
 export const updateLexiconEverywhere = ({text}) => {
   return (dispatch, getState) => {
+    console.log('state: ', getState());
     dispatch(updateLexicon({text}));
     let lexicon = [...getState().lexicon];
     return axios.post(`http://localhost:3333/file`, {test: lexicon})
