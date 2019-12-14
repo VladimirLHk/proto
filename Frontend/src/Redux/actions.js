@@ -32,7 +32,6 @@ export const updateLexicon = ({text}) => {
 };
 
 export const moveBlocksCursor = ({cursorIndex}) => {
-  // console.log('moveBlocksCursor: ', cursorIndex);
   return {
     type: MOVE_BLOCKS_CURSOR,
     cursorIndex

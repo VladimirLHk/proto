@@ -4,8 +4,8 @@ import getProperNounCandidates from "../../TextLib/properNounFilter";
 import getSymbolBlocks from "../../TextLib/getSymbolBlocks";
 
 const convertSymbolBlocksToMarkedBlocksTextFormat = (blocks =>
-    blocks.map(item => {
-      return {text: String.fromCharCode(item.csId), questId: item.status}
+    blocks.map((item, index) => {
+      return {text: String.fromCharCode(item.csId), questId: item.status, id: ''+item.csId+'id-'+index}
     })
 );
 
