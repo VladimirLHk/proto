@@ -7,6 +7,8 @@ import {
   LEXICON_LOAD_SUCCESS,
   LEXICON_LOAD_ERROR,
   MOVE_BLOCKS_CURSOR,
+  CHOICE_DONE,
+  TASK_SET,
 } from './actionsNames';
 import sendLexiconToServer from '../Api/lexicon';
 import axios from "axios";
@@ -35,6 +37,20 @@ export const moveBlocksCursor = ({cursorIndex}) => {
   return {
     type: MOVE_BLOCKS_CURSOR,
     cursorIndex
+  }
+};
+
+export const choiceDone = ({choiceNum}) => {
+  return {
+    type: CHOICE_DONE,
+    choiceNum
+  }
+};
+
+export const taskSet = ({taskNum}) => {
+  return {
+    type: TASK_SET,
+    taskNum
   }
 };
 

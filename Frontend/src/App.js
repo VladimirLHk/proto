@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import MarkedTextBlockJumperGroup from "./containers/markedTextBlockJumper/markedTextBlockJumper";
 import TreeStructure from "./components/treeStructure/treeStructure";
 import {TEST_TREE_STRUCTURE} from "./constants";
+import AnswerSelection from "./components/answerSelection/answerSelection";
 
 class AppCard extends React.Component {
 
@@ -24,20 +25,32 @@ class AppCard extends React.Component {
         {isEdit && <NoteMarkedText/>}
         <NoteSaveEditButton/>
         {isEdit && <MarkedTextBlockJumperGroup/>}
-        <TreeStructure
+        <AnswerSelection
+          question={'Вот такой вот очень-очень-очень важный вопрос.'}
+          answers={['Да', 'Нет', 'Не знаю']}
+          choice={(num) => console.log(['Да', 'Нет', 'Не знаю'][num])}
+        />
+        {false && <TreeStructure
           treeElements={TEST_TREE_STRUCTURE}
           levelMark={"---"}
           className={"btn btn-outline-success btn-sm "}
           nameMaxLength={7}
-        />
+        />}
       </div>
     )
   }
 
 }
 
+const mapStateToProps = state => {
+  return{
+    isEdit: state.buttonState,
+    questionInWork: state.questionInWork,
+  }
+};
+
 const App = connect(
-  (state) => {return {isEdit: state.buttonState}},
+  mapStateToProps,
   (dispatch) => {return {loadLexicon: () => dispatch(loadLexicon())}}
 )(AppCard);
 
