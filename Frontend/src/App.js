@@ -17,6 +17,7 @@ class AppCard extends React.Component {
     this.props.loadLexicon();
   }
 
+
   render() {
     let {isEdit} = this.props;
     return(
