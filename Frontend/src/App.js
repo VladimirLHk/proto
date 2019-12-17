@@ -9,6 +9,8 @@ import MarkedTextBlockJumperGroup from "./containers/markedTextBlockJumper/marke
 import TreeStructure from "./components/treeStructure/treeStructure";
 import {TEST_TREE_STRUCTURE} from "./constants";
 import AnswerSelection from "./components/answerSelection/answerSelection";
+import NameInput from "./components/NameInput/nameInput";
+import BasketStructure from "./containers/BasketStructure/BasketStructure";
 
 class AppCard extends React.Component {
 
@@ -26,17 +28,20 @@ class AppCard extends React.Component {
         {isEdit && <NoteMarkedText/>}
         <NoteSaveEditButton/>
         {isEdit && <MarkedTextBlockJumperGroup/>}
-        <AnswerSelection
-          question={'Вот такой вот очень-очень-очень важный вопрос.'}
-          answers={['Да', 'Нет', 'Не знаю']}
-          choice={(num) => console.log(['Да', 'Нет', 'Не знаю'][num])}
-        />
-        {false && <TreeStructure
-          treeElements={TEST_TREE_STRUCTURE}
-          levelMark={"---"}
-          className={"btn btn-outline-success btn-sm "}
-          nameMaxLength={7}
-        />}
+        <div className={"row"}>
+          <div className={"col-3"}>
+            <AnswerSelection
+              question={'Вот такой вот очень-очень-очень важный вопрос.'}
+              answers={['Да', 'Нет', 'Не знаю']}
+              choice={(num) => console.log(['Да', 'Нет', 'Не знаю'][num])}
+            />
+          </div>
+          <div className={"col-5"}>
+            <div className={"col-3"}>
+              <BasketStructure/>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
@@ -50,9 +55,25 @@ const mapStateToProps = state => {
   }
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadLexicon: () => dispatch(loadLexicon()),
+
+  }
+}
+
 const App = connect(
   mapStateToProps,
-  (dispatch) => {return {loadLexicon: () => dispatch(loadLexicon())}}
+  mapDispatchToProps,
 )(AppCard);
 
 export default App;
+
+// <TreeStructure
+//   title={"Структура классов"}
+//   treeElements={TEST_TREE_STRUCTURE}
+//   levelMark={"---"}
+//   className={"btn btn-outline-success btn-sm "}
+//   nameMaxLength={15}
+// />
+

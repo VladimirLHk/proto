@@ -3,7 +3,9 @@ import buttonState from "./noteButtonPressed";
 import currentText from "./currentNoteTextOperate";
 import lexicon from './updateLexicon';
 import cursorIndex from './cursorIndex';
-import currentStepNum from './goNext'
+import basketsOperation from './basketsSetOperation';
+import currentStepNum from './goNext';
+
 
 export default combineReducers({
   buttonState,
@@ -11,4 +13,5 @@ export default combineReducers({
   lexicon,
   cursorIndex,
   currentStepNum,
+  basketsOperation,
 })

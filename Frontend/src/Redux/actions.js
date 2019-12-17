@@ -9,6 +9,9 @@ import {
   MOVE_BLOCKS_CURSOR,
   CHOICE_DONE,
   TASK_SET,
+  BASKET_PRESSED,
+  BASKET_ADD,
+  SET_BASKETS_SET,
 } from './actionsNames';
 import sendLexiconToServer from '../Api/lexicon';
 import axios from "axios";
@@ -51,6 +54,28 @@ export const taskSet = ({taskNum}) => {
   return {
     type: TASK_SET,
     taskNum
+  }
+};
+
+export const basketAdd = ({newBasketName, parentId}) => {
+  return {
+    type: BASKET_ADD,
+    newBasketName,
+    parentId
+  }
+};
+
+export const changeBasketsSetView = ({basketPressedId}) => {
+  return {
+    type: BASKET_PRESSED,
+    basketPressedId
+  }
+};
+
+export const setBasketsSetView = ({basketsSet}) => {
+  return {
+    type: SET_BASKETS_SET,
+    basketsSet
   }
 };
 
