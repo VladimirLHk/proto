@@ -37,9 +37,7 @@ class AppCard extends React.Component {
             />
           </div>
           <div className={"col-5"}>
-            <div className={"col-3"}>
               <BasketStructure/>
-            </div>
           </div>
         </div>
       </div>

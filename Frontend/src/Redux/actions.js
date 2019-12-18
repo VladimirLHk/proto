@@ -12,6 +12,7 @@ import {
   BASKET_PRESSED,
   BASKET_ADD,
   SET_BASKETS_SET,
+  NOT_CREATE_BASKET,
 } from './actionsNames';
 import sendLexiconToServer from '../Api/lexicon';
 import axios from "axios";
@@ -61,6 +62,13 @@ export const basketAdd = ({newBasketName, parentId}) => {
   return {
     type: BASKET_ADD,
     newBasketName,
+    parentId
+  }
+};
+
+export const cancelBasketAdd = ({parentId}) => {
+  return {
+    type: NOT_CREATE_BASKET,
     parentId
   }
 };

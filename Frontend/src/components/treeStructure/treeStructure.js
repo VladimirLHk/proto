@@ -3,10 +3,10 @@ import $ from 'jquery';
 import Button from "../button/button";
 import NameInput from "../NameInput/nameInput";
 
-const truncateString = (name, nameMaxLength) => {
-  return name.length > nameMaxLength ? name.slice(0,nameMaxLength-1)+'\u2026' : name;
-
-};
+// const truncateString = (name, nameMaxLength) => {
+//   return name.length > nameMaxLength ? name.slice(0,nameMaxLength-1)+'\u2026' : name;
+//
+// };
 
 class TreeStructure extends React.Component {
   componentDidMount() {
@@ -15,7 +15,15 @@ class TreeStructure extends React.Component {
     });}
 
   render() {
-    let {title, treeElements, levelMark, className, nodeOnClick=()=>{}, newNodeOkOnClick=()=>{}, nameMaxLength} = this.props;
+    let {
+      title,
+      treeElements,
+      levelMark,
+      className,
+      nodeOnClick=()=>{},
+      newNodeOkOnClick=()=>{},
+      newNodeCancelOnClick=()=>{}
+    } = this.props;
     return (
       <div className={"row "+className}>
         <div>
@@ -23,13 +31,13 @@ class TreeStructure extends React.Component {
           {treeElements.map((item, index) => {
             let treeElementId = item.id ? item.id : 'tree-'+index;
             return (
-              <div key={treeElementId}  data-toggle="tree_tooltip"  title={item.name}>
+              <div key={treeElementId}  data-toggle="tree_tooltip"  title={item.tip}>
                 {levelMark.repeat(item.level)}
                 {!item.isInput && <Button
                   id={treeElementId}
                   className={item.className}
                   onClick={nodeOnClick}
-                  name={truncateString(item.name, nameMaxLength)}
+                  name={item.name}
                 />}
                 {item.isInput && <NameInput
                   inputButton={item.inputButton}
@@ -37,7 +45,10 @@ class TreeStructure extends React.Component {
                     ...item.okButton,
                     onClick: newNodeOkOnClick
                   }}
-                  cancelButton={item.cancelButton}
+                  cancelButton={{
+                    ...item.cancelButton,
+                    onClick: newNodeCancelOnClick
+                  }}
                 />}
               </div>
             )
@@ -49,3 +60,5 @@ class TreeStructure extends React.Component {
 }
 
 export default TreeStructure;
+
+// name={truncateString(item.name, nameMaxLength)}
