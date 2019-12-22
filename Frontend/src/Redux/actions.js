@@ -13,6 +13,8 @@ import {
   BASKET_ADD,
   SET_BASKETS_SET,
   NOT_CREATE_BASKET,
+  TAG_ADD,
+  TAG_TOGGLE,
 } from './actionsNames';
 import sendLexiconToServer from '../Api/lexicon';
 import axios from "axios";
@@ -86,6 +88,21 @@ export const setBasketsSetView = ({basketsSet}) => {
     basketsSet
   }
 };
+
+export const tagAdd = ({newTagName}) => {
+  return {
+    type: TAG_ADD,
+    newTagName
+  }
+};
+
+export const changeTagStatus = ({tagId}) => {
+  return {
+    type: TAG_TOGGLE,
+    tagId
+  }
+};
+
 
 export const updateLexiconEverywhere = ({text}) => {
   return (dispatch, getState) => {

@@ -11,6 +11,7 @@ import {TEST_TREE_STRUCTURE} from "./constants";
 import AnswerSelection from "./components/answerSelection/answerSelection";
 import NameInput from "./components/NameInput/nameInput";
 import BasketStructure from "./containers/BasketStructure/BasketStructure";
+import TagsStructure from "./containers/TagsStructure/TagsStructure";
 
 class AppCard extends React.Component {
 
@@ -24,8 +25,16 @@ class AppCard extends React.Component {
     let {isEdit} = this.props;
     return(
       <div className="container">
-        {!isEdit && <NoteTextInputHandle/>}
-        {isEdit && <NoteMarkedText/>}
+        <div className={"row"}>
+          <h3>{isEdit ? "Результаты обработки текста:" : "Введите текст:" }</h3>
+          {!isEdit && <div className={"col-12"}><h3></h3><NoteTextInputHandle/></div>}
+          {isEdit &&
+            <>
+              <div className={"col-8"}><NoteMarkedText/></div>
+              <div className={"col-4"}>Кое-что</div>
+            </>
+          }
+        </div>
         <NoteSaveEditButton/>
         {isEdit && <MarkedTextBlockJumperGroup/>}
         <div className={"row"}>
@@ -38,6 +47,9 @@ class AppCard extends React.Component {
           </div>
           <div className={"col-5"}>
               <BasketStructure/>
+          </div>
+          <div className={"col-4"}>
+            <TagsStructure/>
           </div>
         </div>
       </div>
@@ -66,12 +78,3 @@ const App = connect(
 )(AppCard);
 
 export default App;
-
-// <TreeStructure
-//   title={"Структура классов"}
-//   treeElements={TEST_TREE_STRUCTURE}
-//   levelMark={"---"}
-//   className={"btn btn-outline-success btn-sm "}
-//   nameMaxLength={15}
-// />
-

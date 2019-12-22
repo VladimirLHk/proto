@@ -2,7 +2,7 @@ import React from 'react';
 import PropType from 'prop-types';
 import './noteTextInput.css'
 
-const NoteTextInput = ({text, className = "row textareaMain"}) => {
+const NoteTextInput = ({text, className = "textareaMain"}) => {
   return (
     <textarea
       className={className}

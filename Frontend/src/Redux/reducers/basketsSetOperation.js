@@ -11,9 +11,11 @@ const CANCEL_INPUT_CLASS_NAME = '';
 const ADD_BASKET_NAME = "СОЗДАТЬ";
 const ADD_BASKET_ID_PREFIX = "new_basket";
 const NAME_MAX_LENGTH = 15;
+const BASKET_ID_FACTOR = 2;
 
 //формироваине подсказки для узла
 const getToolTip = (name, children, items, addTip) => {
+  console.log(name, children, items, addTip);
   let result = '';
   if (name.length > NAME_MAX_LENGTH) {
     result = name;
@@ -30,7 +32,23 @@ const getToolTip = (name, children, items, addTip) => {
     result += result !== "" ? '\n' : "";
     result += addTip;
   }
+  console.log(result);
   return result
+};
+
+//обновление ToolTip
+const updateToolTip = (basketsSet, currentViewParams, basketId) => {
+  if (basketId === TREE_ROOT_ID) {
+    return
+  }
+  let viewIndex = currentViewParams.findIndex(item => item.id === basketId);
+  let basket = basketsSet.find(item => item.id === basketId);
+  currentViewParams[viewIndex].tip = getToolTip(
+    basket.name,
+    basket.children,
+    basket.items,
+    ""
+  );
 };
 
 //создание узла "Корзина" или "Добавить корзину"
@@ -213,13 +231,13 @@ const setCurrentBasket = buttonId => {
 
 //создание новой корзины
 const createBasket = (basketsSet, newBasketName, parentId) => {
-  let newBasketId = getNewId(2);
+  let newBasketId = getNewId(BASKET_ID_FACTOR);
   for (
     let attempt=0;
     basketsSet.findIndex(item => item.id === newBasketId) !== -1, attempt < 50;
     attempt++
   ) {
-    newBasketId = getNewId(2);
+    newBasketId = getNewId(BASKET_ID_FACTOR);
   };
   return {
     id: newBasketId,
@@ -269,10 +287,13 @@ export default (state = initState, action) => {
     case BASKET_ADD:
       let newBasket = createBasket(state.basketsSet, action.newBasketName, action.parentId);
       let basketsSet = addNewBasket(state.basketsSet, newBasket);
+      let basketsSetViewClone = state.basketsSetView.slice();
+      updateToolTip(basketsSet, basketsSetViewClone, action.parentId);
+      console.log ('basketsSetViewClone:', basketsSetViewClone);
       return {
         currentBasket: newBasket.id,
         basketsSet,
-        basketsSetView: setParamsForView(basketsSet, state.basketsSetView, newBasket.id)
+        basketsSetView: setParamsForView(basketsSet, basketsSetViewClone, newBasket.id)
       };
     default: return state;
   }
