@@ -70,7 +70,7 @@ const getNewBasketInputNode = (level, parentId) => {
     inputButton: {
       id: "newBasketName",
       onInput: () => {},
-      placeholder: "Название группы",
+      placeholder: "Название класса",
       className: NAME_INPUT_CLASS_NAME,
     },
     okButton: {
@@ -289,7 +289,7 @@ export default (state = initState, action) => {
       let basketsSet = addNewBasket(state.basketsSet, newBasket);
       let basketsSetViewClone = state.basketsSetView.slice();
       updateToolTip(basketsSet, basketsSetViewClone, action.parentId);
-      console.log ('basketsSetViewClone:', basketsSetViewClone);
+      console.log ('BASKET_ADD: ', newBasket.id);
       return {
         currentBasket: newBasket.id,
         basketsSet,

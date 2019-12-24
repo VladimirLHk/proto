@@ -8,6 +8,12 @@ const fcClassName = 'properNoun';
 const cursorClassName = 'markedBlockCursor';
 const cursorSelector = 'span.' + cursorClassName;
 
+const convertSymbolBlocksToMarkedBlocksTextFormat = (blocks =>
+    blocks.map((item, index) => {
+      return {text: String.fromCharCode(item.csId), questId: item.status, id: ''+item.csId+'id-'+index}
+    })
+);
+
 // TODO Вероятно, стоит перенести эту функцию из компонента:
 //  снять ответственность за разбиение на абзацы.
 const makeMultiLineMarkedText = textBlocks => {
@@ -70,8 +76,7 @@ class MarkedText extends React.Component {
     this.scrollToCursor();
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('from componentDidUpdate: ', prevProps, prevState, snapshot);
+  componentDidUpdate() {
     this.scrollToCursor();
   }
 
@@ -83,7 +88,7 @@ class MarkedText extends React.Component {
   render () {
     let {className = "row markedTextWrapper", textBlocks, cursorIndex} = this.props;
     // let {className = "markedTextWrapper", textBlocks, cursorIndex} = this.props;
-    let linedText = makeMultiLineMarkedText(textBlocks);
+    let linedText = makeMultiLineMarkedText(convertSymbolBlocksToMarkedBlocksTextFormat(textBlocks));
     // let linedText = [textBlocks];
     let blockNum = -1;
     return (

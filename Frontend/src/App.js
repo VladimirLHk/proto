@@ -12,6 +12,7 @@ import AnswerSelection from "./components/answerSelection/answerSelection";
 import NameInput from "./components/NameInput/nameInput";
 import BasketStructure from "./containers/BasketStructure/BasketStructure";
 import TagsStructure from "./containers/TagsStructure/TagsStructure";
+import Classifications from "./containers/Classifications/Classifications";
 
 class AppCard extends React.Component {
 
@@ -22,12 +23,12 @@ class AppCard extends React.Component {
 
 
   render() {
-    let {isEdit} = this.props;
+    let {isEdit, basketsOperation} = this.props;
     return(
       <div className="container">
         <div className={"row"}>
           <h3>{isEdit ? "Результаты обработки текста:" : "Введите текст:" }</h3>
-          {!isEdit && <div className={"col-12"}><h3></h3><NoteTextInputHandle/></div>}
+          {!isEdit && <div className={"col-12"}><NoteTextInputHandle/></div>}
           {isEdit &&
             <>
               <div className={"col-8"}><NoteMarkedText/></div>
@@ -35,23 +36,9 @@ class AppCard extends React.Component {
             </>
           }
         </div>
-        <NoteSaveEditButton/>
-        {isEdit && <MarkedTextBlockJumperGroup/>}
-        <div className={"row"}>
-          <div className={"col-3"}>
-            <AnswerSelection
-              question={'Вот такой вот очень-очень-очень важный вопрос.'}
-              answers={['Да', 'Нет', 'Не знаю']}
-              choice={(num) => console.log(['Да', 'Нет', 'Не знаю'][num])}
-            />
-          </div>
-          <div className={"col-5"}>
-              <BasketStructure/>
-          </div>
-          <div className={"col-4"}>
-            <TagsStructure/>
-          </div>
-        </div>
+        <NoteSaveEditButton basketsOperation={basketsOperation}/>
+        {isEdit && <MarkedTextBlockJumperGroup />}
+        <Classifications/>
       </div>
     )
   }
@@ -62,6 +49,7 @@ const mapStateToProps = state => {
   return{
     isEdit: state.buttonState,
     questionInWork: state.questionInWork,
+    basketsSet: state.basketsSet,
   }
 };
 
@@ -78,3 +66,19 @@ const App = connect(
 )(AppCard);
 
 export default App;
+
+// <div className={"row"}>
+//   <div className={"col-3"}>
+//     <AnswerSelection
+//       question={'Вот такой вот очень-очень-очень важный вопрос.'}
+//       answers={['Да', 'Нет', 'Не знаю']}
+//       choice={(num) => console.log(['Да', 'Нет', 'Не знаю'][num])}
+//     />
+//   </div>
+//   <div className={"col-5"}>
+//     <BasketStructure/>
+//   </div>
+//   <div className={"col-4"}>
+//     <TagsStructure/>
+//   </div>
+// </div>

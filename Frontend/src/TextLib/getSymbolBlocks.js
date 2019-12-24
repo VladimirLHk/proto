@@ -1,17 +1,21 @@
-
-const getSymbolBlocks = (text = '', basketsSet = [], codesSet = {}, isAutoApprove = symbol => false) => {
+//пока рассматриваем только одиночные символы; не рассматриваем составные, например, перенос: "дефис"+"конец строки/абзаца"
+const getSymbolBlocks = (text = '', basketsSet = [], isAutoApprove = symbol => false) => {
+  basketsSet = basketsSet ? basketsSet : [];
+  isAutoApprove = typeof isAutoApprove === 'function' ? isAutoApprove : () => false;
   let a = text.split('').map(symbol => {
     let csId = symbol.codePointAt(0);
-    codesSet[csId] = symbol;
-    // let status = 1;
     let basketId = [];
-    basketsSet.forEach(item => {
-      if (item.symbols.contains(csId)) {
-        // status = status === 1 ? 2 : 3; //TODO устанавливать после заполнения массива basketId по его размеру
-        basketId.push(item.id);
+    basketsSet.forEach(basket => {
+      if (basket.items.contains(csId)) {
+        basketId.push(basket.id);
       }
     });
     let status = Math.min(basketId.length+1, 3);
+    //status
+    // 0 - символ классифицирован,
+    // 1 - символ неизвестен (не принадлежит ни одному из классов),
+    // 2 - символ принадлежит к единственному классу,
+    // 3 - символ принадлежит к нескольким классам.
     if (status === 2 && isAutoApprove(symbol)) {
       return {
         csId,

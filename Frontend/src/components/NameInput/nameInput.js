@@ -27,10 +27,12 @@ import Button from "../button/button";
 
 class NameInput extends React.Component {
   componentDidMount() {
+    console.log('focus on:', this.props.inputButton.id);
     document.getElementById(this.props.inputButton.id).focus();
   }
 
   componentDidUpdate() {
+    console.log('focus on:', this.props.inputButton.id);
     document.getElementById(this.props.inputButton.id).focus();
   }
 

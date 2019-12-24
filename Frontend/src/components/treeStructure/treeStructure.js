@@ -3,11 +3,6 @@ import $ from 'jquery';
 import Button from "../button/button";
 import NameInput from "../NameInput/nameInput";
 
-// const truncateString = (name, nameMaxLength) => {
-//   return name.length > nameMaxLength ? name.slice(0,nameMaxLength-1)+'\u2026' : name;
-//
-// };
-
 class TreeStructure extends React.Component {
   componentDidMount() {
     $(function(){
@@ -15,6 +10,7 @@ class TreeStructure extends React.Component {
     });}
 
   render() {
+    console.log('TreeStructure', this.props);
     let {
       title,
       treeElements,
@@ -27,7 +23,7 @@ class TreeStructure extends React.Component {
     return (
       <div className={"row "+className}>
         <div>
-          {title && <h3>{title}</h3>}
+          {title && <h4>{title}</h4>}
           {treeElements.map((item, index) => {
             let treeElementId = item.id ? item.id : 'tree-'+index;
             return (
@@ -60,5 +56,3 @@ class TreeStructure extends React.Component {
 }
 
 export default TreeStructure;
-
-// name={truncateString(item.name, nameMaxLength)}

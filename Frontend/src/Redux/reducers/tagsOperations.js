@@ -21,10 +21,8 @@ const crateNewTag = (newTagName, tagsSet) => {
 };
 
 const toggleTag = (tagId, tagsSet) => {
-  console.log('1. toggleTag = ', tagId, tagsSet);
   let tag = tagsSet.find(tag => tag.id === tagId);
   tag.switchOn = !tag.switchOn;
-  console.log('2. toggleTag = ', tagsSet);
   return tagsSet.sort((a,b) => {return a.name>b.name ? 1 : -1}).slice()
 };
 

@@ -15,14 +15,16 @@ import {
   NOT_CREATE_BASKET,
   TAG_ADD,
   TAG_TOGGLE,
+  GET_QUESTION,
 } from './actionsNames';
 import sendLexiconToServer from '../Api/lexicon';
 import axios from "axios";
 
-export const saveNoteButtonPressed = ({text}) => {
+export const saveNoteButtonPressed = ({text, basketsSet}) => {
   return {
     type: SAVE_NOTE_BUTTON_PRESSED,
     text,
+    basketsSet,
   }
 };
 
@@ -103,12 +105,21 @@ export const changeTagStatus = ({tagId}) => {
   }
 };
 
+export const getQuestion = ({blocks, currentBasket, tagsSet}) => {
+  return {
+    type: GET_QUESTION,
+    blocks,
+    currentBasket,
+    tagsSet,
+  }
+};
+
 
 export const updateLexiconEverywhere = ({text}) => {
   return (dispatch, getState) => {
-    console.log('state: ', getState());
     dispatch(updateLexicon({text}));
-    let lexicon = [...getState().lexicon];
+    // let lexicon = [...getState().lexicon]; //это работает, когда lexicon - интерируемый объект: массив или Set/Map
+    let lexicon = JSON.stringify(getState().lexicon);
     return axios.post(`http://localhost:3333/file`, {test: lexicon})
       .then(res => console.log(res))
       .catch(res => console.log(res))
@@ -121,7 +132,7 @@ export const loadLexicon = (()=>{
     return axios.get(`http://localhost:3333/file`)
       .then(res => {
         let text = res.data.text;
-        console.log(text);
+        console.log('loadLexicon:', text);
         dispatch(updateLexicon({text}))
       })
       .catch(res => console.log(res))
