@@ -8,7 +8,7 @@ const updateBlocks = (blocks, {csId, symbolId}) => {
     if (block.csId === csId) {
       block.symbolId = symbolId;
       block.status = 0;
-      delete block.basketId;
+      delete block.symbols;
     }
     return block
   });

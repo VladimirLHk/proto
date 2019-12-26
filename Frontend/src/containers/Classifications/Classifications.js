@@ -3,11 +3,10 @@ import {connect} from "react-redux";
 import TreeStructure from "../../components/treeStructure/treeStructure";
 import AnswerSelection from "../../components/answerSelection/answerSelection";
 import {
-  addSymbol,
   basketAdd,
   cancelBasketAdd,
   changeBasketsSetView,
-  changeTagStatus, classifiedBlock, includeToBasket,
+  changeTagStatus,
   tagAdd
 } from "../../Redux/actions";
 import TagsList from "../../components/tagsList/tagsList";
@@ -44,16 +43,14 @@ const ClassificationsCard = (
         <AnswerSelection
           question={answerBlockParams.question}
           answers={answerBlockParams.answers ? answerBlockParams.answers : []}
-          choice={(num) => {
-            if (num == 0) {
+          choice={(buttonNum) => {
               let symbolId = getNewSymbolId(questionStructure.symbolsSet);
               let csId = answerBlockParams.questBlock.csId;
               let basketId = questionStructure.currentBasketId;
               let tags = questionStructure.tagsSet;
-              answerChoiceDone(addSymbol({symbolId, csId, basketId, tags}));
-              answerChoiceDone(includeToBasket({symbolId, basketId}));
-              answerChoiceDone(classifiedBlock({symbolId, csId}));
-            }
+              answerBlockParams.actionsSet[buttonNum].forEach(action => {
+                answerChoiceDone(action({symbolId, csId, basketId, tags}))
+              });
           }}
         />
       </div>
@@ -126,7 +123,7 @@ const mapDispatchToProps = (dispatch) => {
       },
     },
   }
-}
+};
 
 const Classifications = connect(
   mapStateToProps,
@@ -134,10 +131,3 @@ const Classifications = connect(
 )(ClassificationsCard);
 
 export default Classifications;
-
-
-// <AnswerSelection
-//   question={'Вот такой вот очень-очень-очень важный вопрос.'}
-//   answers={['Да', 'Нет', 'Не знаю']}
-//   choice={(num) => console.log(['Да', 'Нет', 'Не знаю'][num])}
-// />

@@ -1,17 +1,9 @@
 //пока рассматриваем только одиночные символы; не рассматриваем составные, например, перенос: "дефис"+"конец строки/абзаца"
-const getSymbolBlocks = ({text = '', basketsSet = [], symbolsSet = [], isAutoApprove = symbol => false}) => {
+const getSymbolBlocks = ({text = '', symbolsSet = [], isAutoApprove = symbol => false}) => {
   isAutoApprove = typeof isAutoApprove === 'function' ? isAutoApprove : () => false;
-  console.log ('getSymbolBlocks', symbolsSet);
-  let a = text.split('').map(symbol => {
+  return text.split('').map(symbol => {
     let csId = symbol.codePointAt(0);
     let symbols = symbolsSet.filter(item => item.csId === csId);
-    // let basketId = [];
-    // basketsSet.forEach(basket => {
-    //   if (basket.items.contains(csId)) {
-    //     basketId.push(basket.id);
-    //   }
-    // });
-    // let status = Math.min(basketId.length+1, 3);
     let status = Math.min(symbols.length+1, 3);
     //status
     // 0 - символ классифицирован,
@@ -22,14 +14,12 @@ const getSymbolBlocks = ({text = '', basketsSet = [], symbolsSet = [], isAutoApp
     //   return {
     //     csId,
     //     status: 0,
-    //     basketId: basketId[0]
+    //     symbols: symbols[0]
     //   }
     // }
     // return {csId, status, basketId}
     return {csId, status, symbols}
   });
-  console.log('SymBlocks=', a);
-  return a
 };
 
 export default getSymbolBlocks;

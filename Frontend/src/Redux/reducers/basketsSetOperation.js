@@ -15,7 +15,6 @@ const BASKET_ID_FACTOR = 2;
 
 //формироваине подсказки для узла
 const getToolTip = (name, children, items, addTip) => {
-  console.log(name, children, items, addTip);
   let result = '';
   if (name.length > NAME_MAX_LENGTH) {
     result = name;
@@ -32,7 +31,6 @@ const getToolTip = (name, children, items, addTip) => {
     result += result !== "" ? '\n' : "";
     result += addTip;
   }
-  console.log(result);
   return result
 };
 
@@ -88,7 +86,6 @@ const getNewBasketInputNode = (level, parentId) => {
 
 //создание/обновление представления
 const setParamsForView = (basketsSet, currentViewParams, pressedNodeId) => {
-  // console.log('from setParamsForView:', basketsSet, currentViewParams, pressedNodeId);
 
   const CHANGE_INPUT_NODE_TO_ADD = inputIndex => {
     //в представлении есть узел ввода имени ==> закрываем его и заменяем на кнопку создания нового узла

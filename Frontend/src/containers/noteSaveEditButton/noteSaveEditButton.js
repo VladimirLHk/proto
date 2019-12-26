@@ -12,7 +12,6 @@ const mapStateToProps = (state) => {
 // basketsSet: state.basketsOperation.basketsSet,
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  console.log('NoteSaveEditButton', ownProps);
   return {
     onClick: () => {
       let textareaNode = document.getElementById('textarea');

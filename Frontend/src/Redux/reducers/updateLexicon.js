@@ -6,7 +6,6 @@ const initialState = {};
 
 export default (state = initialState, action) => {
   if (action.type === UPDATE_LEXICON) {
-    // console.log('state in start UPDATE_LEXICON:', state);
     let textLexicon = action.text.split('').reduce((prevRes, symbol,index) => {
       prevRes[symbol.codePointAt(0)] = symbol;
       return prevRes
@@ -26,7 +25,6 @@ export default (state = initialState, action) => {
 //     getWords(action.text).forEach( word => {
 //       resultLexicon.add(word)
 //     });
-//     console.log(resultLexicon);
 //     return resultLexicon
 //   }
 //

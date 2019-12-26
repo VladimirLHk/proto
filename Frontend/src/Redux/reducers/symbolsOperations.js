@@ -23,13 +23,12 @@ export default (state = initState, action) => {
     let {symbolId, csId, basketId, tags} = action;
     tags = tags.reduce((selectedTags, tag) => {
       if (tag.switchOn) {
-        selectedTags.push(tag)
+        selectedTags.push(tag.id)
       }
       return selectedTags
     }, []);
     let newSymbol = {id: symbolId, csId, basketId, tags};
     newSymbolSet.push(newSymbol);
-    console.log('SYMBOL_ADD:', newSymbolSet);
     return {
       symbolsSet: newSymbolSet,
       lastAddedSymbol: newSymbol,

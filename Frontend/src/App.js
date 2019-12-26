@@ -18,7 +18,6 @@ import symbolsOperations from "./Redux/reducers/symbolsOperations";
 class AppCard extends React.Component {
 
   componentDidMount() {
-    console.log("component App DidMount: ", this.props);
     this.props.loadLexicon();
   }
 
@@ -66,19 +65,3 @@ const App = connect(
 )(AppCard);
 
 export default App;
-
-// <div className={"row"}>
-//   <div className={"col-3"}>
-//     <AnswerSelection
-//       question={'Вот такой вот очень-очень-очень важный вопрос.'}
-//       answers={['Да', 'Нет', 'Не знаю']}
-//       choice={(num) => console.log(['Да', 'Нет', 'Не знаю'][num])}
-//     />
-//   </div>
-//   <div className={"col-5"}>
-//     <BasketStructure/>
-//   </div>
-//   <div className={"col-4"}>
-//     <TagsStructure/>
-//   </div>
-// </div>

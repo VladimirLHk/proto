@@ -5,7 +5,6 @@ import {TEST_TREE_STRUCTURE} from "../../constants";
 import {basketAdd, changeBasketsSetView, cancelBasketAdd} from '../../Redux/actions';
 
 const mapStateToProps = (state) => {
-  console.log("BasketStructure. mapStateToProps:", state);
  return {
    title: "Структура классов",
    levelMark: "---",
@@ -25,7 +24,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     newNodeCancelOnClick: (e) => {
       let parentId = e.target.id.replace("newBasketCancel", "");
-      console.log('from BasketStructure.js. parentId=', parentId);
       dispatch(cancelBasketAdd({parentId}))
     },
     nodeOnClick: (e) => {

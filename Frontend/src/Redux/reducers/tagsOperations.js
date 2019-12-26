@@ -15,7 +15,7 @@ const crateNewTag = (newTagName, tagsSet) => {
   tagsSet.push({
     id: newTagId,
     name: newTagName,
-    switchOn: false,
+    switchOn: true,
   })
   return tagsSet.sort((a,b) => {return a.name>b.name ? 1 : -1}).slice()
 };

@@ -10,7 +10,6 @@ class TreeStructure extends React.Component {
     });}
 
   render() {
-    console.log('TreeStructure', this.props);
     let {
       title,
       treeElements,

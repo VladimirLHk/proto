@@ -62,7 +62,6 @@ const makeMultiLineMarkedText = textBlocks => {
   if (line.length > 0) {
     result.push(line);
   }
-  console.log('lined: ', result);
   return result;
 };
 
@@ -102,7 +101,6 @@ class MarkedText extends React.Component {
                   //   return null
                   // }
                   questId && blockNum++;
-                  blockNum === cursorIndex && console.log(text.codePointAt(0));
                   let key = spanIdPrefix + index;
                   return <MarkedTextBlock
                     key = {key}

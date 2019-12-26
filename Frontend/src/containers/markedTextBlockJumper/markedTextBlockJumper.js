@@ -29,12 +29,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return {
     clickNext: (blocksAmount, cursorIndex) => {
-      console.log('clickNext', blocksAmount, cursorIndex);
       cursorIndex = (cursorIndex + 1) % blocksAmount;
       dispatch(moveBlocksCursor({cursorIndex}))
     },
     clickPrev: (blocksAmount, cursorIndex) => {
-      console.log('clickPrev');
       cursorIndex = (cursorIndex + blocksAmount - 1) % blocksAmount;
       dispatch(moveBlocksCursor({cursorIndex}))}
   }
