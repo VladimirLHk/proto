@@ -1,6 +1,7 @@
 import {
   EDIT_NOTE_BUTTON_PRESSED,
   SAVE_NOTE_BUTTON_PRESSED,
+  CLASSIFIED_BLOCK,
   UPDATE_LEXICON,
   LEXICON_UPDATED,
   LEXICON_LOADING,
@@ -13,18 +14,21 @@ import {
   BASKET_ADD,
   SET_BASKETS_SET,
   NOT_CREATE_BASKET,
+  INCLUDE_TO_BASKET,
   TAG_ADD,
   TAG_TOGGLE,
   GET_QUESTION,
+  SYMBOL_ADD,
 } from './actionsNames';
 import sendLexiconToServer from '../Api/lexicon';
 import axios from "axios";
 
-export const saveNoteButtonPressed = ({text, basketsSet}) => {
+export const saveNoteButtonPressed = ({text, basketsSet, symbolsSet}) => {
   return {
     type: SAVE_NOTE_BUTTON_PRESSED,
     text,
     basketsSet,
+    symbolsSet,
   }
 };
 
@@ -38,6 +42,14 @@ export const updateLexicon = ({text}) => {
   return {
     type: UPDATE_LEXICON,
     text
+  }
+};
+
+export const classifiedBlock = ({csId, symbolId}) => {
+  return {
+    type: CLASSIFIED_BLOCK,
+    csId,
+    symbolId,
   }
 };
 
@@ -84,6 +96,14 @@ export const changeBasketsSetView = ({basketPressedId}) => {
   }
 };
 
+export const includeToBasket = ({basketId, symbolId}) => {
+  return {
+    type: INCLUDE_TO_BASKET,
+    basketId,
+    symbolId,
+  }
+};
+
 export const setBasketsSetView = ({basketsSet}) => {
   return {
     type: SET_BASKETS_SET,
@@ -111,6 +131,16 @@ export const getQuestion = ({blocks, currentBasket, tagsSet}) => {
     blocks,
     currentBasket,
     tagsSet,
+  }
+};
+
+export const addSymbol = ({symbolId, csId, basketId, tags=[]}) => {
+  return {
+    type: SYMBOL_ADD,
+    symbolId,
+    csId,
+    basketId,
+    tags,
   }
 };
 

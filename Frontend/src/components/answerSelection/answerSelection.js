@@ -7,7 +7,7 @@ const AnswerSelection = ({question, answers, choice}) => {
   return (
     <div className={"row"}>
       <div>
-        <div>{question.map(line => <p>{line}</p>)}</div>
+        <div>{question.map((line, index) => <p key={'Q'+index}>{line}</p>)}</div>
         {answers.map((name, index) => {
           let id = BUTTON_PREFIX+index;
           return(

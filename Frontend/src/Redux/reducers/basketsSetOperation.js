@@ -1,4 +1,4 @@
-import {BASKET_ADD, BASKET_PRESSED, SET_BASKETS_SET, NOT_CREATE_BASKET, SAVE_NOTE_BUTTON_PRESSED} from "../actionsNames";
+import {BASKET_ADD, BASKET_PRESSED, SET_BASKETS_SET, NOT_CREATE_BASKET, INCLUDE_TO_BASKET, SAVE_NOTE_BUTTON_PRESSED} from "../actionsNames";
 import {getNewId} from "../../TextLib/getNewId";
 import truncateString from "../../TextLib/truncateString";
 
@@ -175,7 +175,7 @@ const setParamsForView = (basketsSet, currentViewParams, pressedNodeId) => {
 
   //2.2.2. Скрытие/открытие ветки структуры
   //2.2.2.1. У нажатого узла есть элементы
-  if (basketsSet[basketSetIndex].item && basketsSet[basketSetIndex].item.length > 0) {
+  if (basketsSet[basketSetIndex].items && basketsSet[basketSetIndex].items.length > 0) {
     return currentViewParams //возвращаем БЕЗ изменений
   }
   //2.2.2.2. Нажатый узел не содержит элементы
@@ -289,11 +289,28 @@ export default (state = initState, action) => {
       let basketsSet = addNewBasket(state.basketsSet, newBasket);
       let basketsSetViewClone = state.basketsSetView.slice();
       updateToolTip(basketsSet, basketsSetViewClone, action.parentId);
-      console.log ('BASKET_ADD: ', newBasket.id);
       return {
         currentBasket: newBasket.id,
         basketsSet,
         basketsSetView: setParamsForView(basketsSet, basketsSetViewClone, newBasket.id)
+      };
+    case INCLUDE_TO_BASKET:
+      let basketsSetClone = state.basketsSet.slice();
+      let basketIndex = basketsSetClone.findIndex(basket => basket.id === action.basketId);
+      if (basketIndex === -1) {
+        return state
+      }
+      if (basketsSetClone[basketIndex].items) {
+        basketsSetClone[basketIndex].items.push(action.symbolId)
+      } else {
+        basketsSetClone[basketIndex].items = [action.symbolId];
+      }
+      let newBasketsSetView = state.basketsSetView.slice();
+      updateToolTip(basketsSetClone, newBasketsSetView, action.basketId);
+      return {
+        ...state,
+        basketsSetView: newBasketsSetView,
+        basketsSet: basketsSetClone,
       };
     default: return state;
   }

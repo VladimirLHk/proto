@@ -2,12 +2,41 @@ import React from 'react';
 import {connect} from "react-redux";
 import TreeStructure from "../../components/treeStructure/treeStructure";
 import AnswerSelection from "../../components/answerSelection/answerSelection";
-import {basketAdd, cancelBasketAdd, changeBasketsSetView, changeTagStatus, tagAdd} from "../../Redux/actions";
+import {
+  addSymbol,
+  basketAdd,
+  cancelBasketAdd,
+  changeBasketsSetView,
+  changeTagStatus, classifiedBlock, includeToBasket,
+  tagAdd
+} from "../../Redux/actions";
 import TagsList from "../../components/tagsList/tagsList";
 import symbolBlocksQuestionGenerator from "../../TextLib/symbolBlocksQuestionGenerator";
+import {getNewId} from '../../TextLib/getNewId';
 
-const ClassificationsCard = ({questionStructure, basketStructure, tagsStructure, basketStructureFuncs, tagsStructureFuncs}) => {
-  console.log('ClassificationsCard', questionStructure);
+const SYMBOL_ID_FACTOR = 4;
+
+const getNewSymbolId = (symbolsSet) => {
+  let newSymbolId = getNewId(SYMBOL_ID_FACTOR);
+  for (
+    let attempt=0;
+    symbolsSet.findIndex(item => item.id === newSymbolId) !== -1, attempt < 50;
+    attempt++
+  ) {
+    newSymbolId = getNewId(SYMBOL_ID_FACTOR);
+  }
+  return newSymbolId;
+};
+
+const ClassificationsCard = (
+  {
+    questionStructure,
+    basketStructure,
+    tagsStructure,
+    answerChoiceDone,
+    basketStructureFuncs,
+    tagsStructureFuncs}
+    ) => {
   let answerBlockParams = symbolBlocksQuestionGenerator(questionStructure);
   return(
     <div className={"row"}>
@@ -15,7 +44,17 @@ const ClassificationsCard = ({questionStructure, basketStructure, tagsStructure,
         <AnswerSelection
           question={answerBlockParams.question}
           answers={answerBlockParams.answers ? answerBlockParams.answers : []}
-          choice={(num) => console.log(['Да', 'Нет', 'Не знаю'][num])}
+          choice={(num) => {
+            if (num == 0) {
+              let symbolId = getNewSymbolId(questionStructure.symbolsSet);
+              let csId = answerBlockParams.questBlock.csId;
+              let basketId = questionStructure.currentBasketId;
+              let tags = questionStructure.tagsSet;
+              answerChoiceDone(addSymbol({symbolId, csId, basketId, tags}));
+              answerChoiceDone(includeToBasket({symbolId, basketId}));
+              answerChoiceDone(classifiedBlock({symbolId, csId}));
+            }
+          }}
         />
       </div>
       <div className={"col-5"}>
@@ -30,12 +69,14 @@ const ClassificationsCard = ({questionStructure, basketStructure, tagsStructure,
 }
 
 const mapStateToProps = state => {
+  console.log('Current state: ', state);
   return{
     questionStructure: {
       blocks: state.currentText,
       basketsSet: state.basketsOperation.basketsSet,
       currentBasketId: state.basketsOperation.currentBasket,
       tagsSet: state.tagsOperations.tagsSet,
+      symbolsSet: state.symbolsOperations.symbolsSet,
     },
     basketStructure: {
       title: "Структура классов",
@@ -51,7 +92,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    answerChoiceDone: (id) => {dispatch(id)},
+    answerChoiceDone: (action) => {dispatch(action)},
     basketStructureFuncs: {
       newNodeOkOnClick: (e) => {
         let newBasketName = document.getElementById('newBasketName').value;

@@ -7,17 +7,18 @@ const mapStateToProps = (state) => {
   return {
     name: state.buttonState ? NOTE_BUTTON_NAMES.edit_note : NOTE_BUTTON_NAMES.save_note,
     className: "buttonSaveOrEdit",
-    basketsSet: state.basketsOperation.basketsSet,
   }
 };
+// basketsSet: state.basketsOperation.basketsSet,
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log('NoteSaveEditButton', ownProps);
   return {
     onClick: () => {
       let textareaNode = document.getElementById('textarea');
       if (textareaNode) {
         let text = textareaNode.value;
-        dispatch(saveNoteButtonPressed({text, basketsSet: ownProps.basketsSet}));
+        dispatch(saveNoteButtonPressed({text, basketsSet: ownProps.basketsSet, symbolsSet: ownProps.symbolsSet}));
         dispatch(updateLexiconEverywhere({text}));
       } else {
         dispatch(editNoteButtonPressed())

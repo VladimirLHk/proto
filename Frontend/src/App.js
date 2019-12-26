@@ -13,6 +13,7 @@ import NameInput from "./components/NameInput/nameInput";
 import BasketStructure from "./containers/BasketStructure/BasketStructure";
 import TagsStructure from "./containers/TagsStructure/TagsStructure";
 import Classifications from "./containers/Classifications/Classifications";
+import symbolsOperations from "./Redux/reducers/symbolsOperations";
 
 class AppCard extends React.Component {
 
@@ -21,9 +22,8 @@ class AppCard extends React.Component {
     this.props.loadLexicon();
   }
 
-
   render() {
-    let {isEdit, basketsOperation} = this.props;
+    let {isEdit, basketsOperation, symbolsSet} = this.props;
     return(
       <div className="container">
         <div className={"row"}>
@@ -36,7 +36,7 @@ class AppCard extends React.Component {
             </>
           }
         </div>
-        <NoteSaveEditButton basketsOperation={basketsOperation}/>
+        <NoteSaveEditButton basketsOperation={basketsOperation} symbolsSet = {symbolsSet}/>
         {isEdit && <MarkedTextBlockJumperGroup />}
         <Classifications/>
       </div>
@@ -49,14 +49,14 @@ const mapStateToProps = state => {
   return{
     isEdit: state.buttonState,
     questionInWork: state.questionInWork,
-    basketsSet: state.basketsSet,
+    basketsOperation: state.basketsOperation,
+    symbolsSet: state.symbolsOperations.symbolsSet,
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     loadLexicon: () => dispatch(loadLexicon()),
-
   }
 }
 

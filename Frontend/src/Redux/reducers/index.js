@@ -5,7 +5,8 @@ import lexicon from './updateLexicon';
 import cursorIndex from './cursorIndex';
 import basketsOperation from './basketsSetOperation';
 import currentStepNum from './goNext';
-import tagsOperations from './tagsOperations'
+import tagsOperations from './tagsOperations';
+import symbolsOperations from './symbolsOperations';
 
 
 export default combineReducers({
@@ -16,4 +17,5 @@ export default combineReducers({
   currentStepNum,
   basketsOperation,
   tagsOperations,
+  symbolsOperations,
 })
