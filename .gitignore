@@ -6,6 +6,7 @@
 /0 garbage
 /.pnp
 .pnp.js
+*.tmp
 
 # testing
 /coverage
