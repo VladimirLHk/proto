@@ -2,6 +2,7 @@ import {
   EDIT_NOTE_BUTTON_PRESSED,
   SAVE_NOTE_BUTTON_PRESSED,
   CLASSIFIED_BLOCK,
+  SKIP_QUESTION,
   UPDATE_LEXICON,
   LEXICON_UPDATED,
   LEXICON_LOADING,
@@ -45,11 +46,21 @@ export const updateLexicon = ({text}) => {
   }
 };
 
-export const classifiedBlock = ({csId, symbolId}) => {
+export const classifiedBlock = ({csId, symbolId, isForAll}) => {
   return {
     type: CLASSIFIED_BLOCK,
     csId,
     symbolId,
+    isForAll,
+  }
+};
+
+export const skipQuestion = ({csId, symbolId, isForAll}) => {
+  return {
+    type: SKIP_QUESTION,
+    csId,
+    symbolId,
+    isForAll,
   }
 };
 

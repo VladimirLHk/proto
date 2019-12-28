@@ -20,12 +20,11 @@ markedTextBlockJumper.propTypes = {
 
 const mapStateToProps = state => {
   return{
-    blocksAmount: state.currentText.length,
+    blocksAmount: state.blocksOperations.blocks.length, //state.currentText.length,
     cursorIndex: state.cursorIndex,
   }
 }
 
-// rowIndex < 0 ? blocksAmount-1 : rowIndex % blocksAmount
 const mapDispatchToProps = (dispatch) => {
   return {
     clickNext: (blocksAmount, cursorIndex) => {

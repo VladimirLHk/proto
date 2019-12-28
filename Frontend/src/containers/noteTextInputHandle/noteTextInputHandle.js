@@ -4,7 +4,7 @@ import getTextFromBlocks from "../../TextLib/getTextFromBlocks";
 
 const mapStateToProps = (state) => {
   return {
-    text: getTextFromBlocks(state.currentText),
+    text: getTextFromBlocks(state.blocksOperations.blocks), //state.currentText
   }
 };
 

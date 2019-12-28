@@ -7,6 +7,7 @@ const spanIdPrefix = 'spanText';
 const fcClassName = 'properNoun';
 const cursorClassName = 'markedBlockCursor';
 const cursorSelector = 'span.' + cursorClassName;
+const CURSOR_ELEMENT_ID = 'CURSOR_ELEMENT_ID';
 
 const convertSymbolBlocksToMarkedBlocksTextFormat = (blocks =>
     blocks.map((item, index) => {
@@ -79,9 +80,9 @@ class MarkedText extends React.Component {
     this.scrollToCursor();
   }
 
-  scrollToCursor() {
-    let cursorElement = document.querySelector(cursorSelector);
-    cursorElement && cursorElement.scrollIntoView({ behavior: 'smooth',  block: "center" });
+  scrollToCursor() { //TODO Scroll не работает!!!
+    // let cursorElement = document.querySelector(cursorSelector).parentNode;
+    // cursorElement && cursorElement.scrollIntoView({ behavior: 'smooth',  block: "center" });
   }
 
   render () {
@@ -104,7 +105,7 @@ class MarkedText extends React.Component {
                   let key = spanIdPrefix + index;
                   return <MarkedTextBlock
                     key = {key}
-                    id = {''+id}
+                    id = {'MarkedTextBlock'+id}
                     className = {questId ? (blockNum === cursorIndex ? cursorClassName : fcClassName) : ''}
                     text = {text}
                   />
@@ -121,7 +122,7 @@ class MarkedText extends React.Component {
 const NoteMarkedText = connect(
   (state) =>
   {return {
-    textBlocks: state.currentText,
+    textBlocks: state.blocksOperations.blocks, //state.currentText,
     cursorIndex: state.cursorIndex,
   }}
   )(MarkedText);

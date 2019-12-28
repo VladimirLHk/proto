@@ -38,9 +38,10 @@ const ClassificationsCard = (
     ) => {
   let answerBlockParams = symbolBlocksQuestionGenerator(questionStructure);
   return(
-    <div className={"row"}>
-      <div className={"col-3"}>
+    <div className={"row mt-2"}>
+      <div className={"col-4 " + (questionStructure.isShow ? " " : " invisible")}>
         <AnswerSelection
+          title={"Решения:"}
           question={answerBlockParams.question}
           answers={answerBlockParams.answers ? answerBlockParams.answers : []}
           choice={(buttonNum) => {
@@ -54,22 +55,25 @@ const ClassificationsCard = (
           }}
         />
       </div>
-      <div className={"col-5"}>
+      <div className={"col-5 border-right border-left"}>
         <TreeStructure
           {...Object.assign({}, basketStructure, basketStructureFuncs)} />
       </div>
-      <div className={"col-4"}>
+      <div className={"col-3 "}>
         <TagsList {...Object.assign({}, tagsStructure, tagsStructureFuncs)}/>
       </div>
     </div>
   )
 }
 
+
+
 const mapStateToProps = state => {
   console.log('Current state: ', state);
   return{
     questionStructure: {
-      blocks: state.currentText,
+      isShow: state.buttonState,
+      blocks: state.blocksOperations.blocks, // blocks: state.currentText,
       basketsSet: state.basketsOperation.basketsSet,
       currentBasketId: state.basketsOperation.currentBasket,
       tagsSet: state.tagsOperations.tagsSet,
@@ -79,6 +83,7 @@ const mapStateToProps = state => {
       title: "Структура классов",
       levelMark: "---",
       treeElements: state.basketsOperation.basketsSetView,
+      className: " pl-3 "
     },
     tagsStructure: {
       title: "Список признаков",

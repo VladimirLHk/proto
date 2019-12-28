@@ -3,6 +3,8 @@ import $ from 'jquery';
 import Button from "../button/button";
 import NameInput from "../NameInput/nameInput";
 
+const MARGINS = ' mt-1 mb-1';
+
 class TreeStructure extends React.Component {
   componentDidMount() {
     $(function(){
@@ -35,6 +37,7 @@ class TreeStructure extends React.Component {
                   name={item.name}
                 />}
                 {item.isInput && <NameInput
+                  groupWrapClass = {"d-inline-block "+MARGINS}
                   inputButton={item.inputButton}
                   okButton={{
                     ...item.okButton,

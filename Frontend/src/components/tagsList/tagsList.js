@@ -6,11 +6,12 @@ const TagsList = ({ title, tagsList, okOnClick=()=>{}, cancelOnClick=()=>{}, cha
     <div>
       <h4>{title}</h4>
       <NameInput
+        groupWrapClass={"mb-2"}
         inputButton={{
           id: "newTagName",
           onInput: () => {},
           placeholder: "Название признака",
-          className:"",
+          className:"v-center",
         }}
         okButton = {{
           id: "newTagCreate",
@@ -23,10 +24,10 @@ const TagsList = ({ title, tagsList, okOnClick=()=>{}, cancelOnClick=()=>{}, cha
           className: "",
         }}
       />
-      <div>
+
         {
           tagsList.map((item, index) => {
-            return <p key={'tag'+index} className={""}>
+            return <div key={'tag'+index} className={""}>
               <input
                 type={'checkbox'}
                 className={""}
@@ -34,10 +35,9 @@ const TagsList = ({ title, tagsList, okOnClick=()=>{}, cancelOnClick=()=>{}, cha
                 checked={item.switchOn}
                 onChange={changeTagStatus}/>
               {item.name}
-            </p>
+            </div>
           })
         }
-      </div>
     </div>
   )
 };

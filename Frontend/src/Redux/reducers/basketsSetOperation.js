@@ -2,10 +2,12 @@ import {BASKET_ADD, BASKET_PRESSED, SET_BASKETS_SET, NOT_CREATE_BASKET, INCLUDE_
 import {getNewId} from "../../TextLib/getNewId";
 import truncateString from "../../TextLib/truncateString";
 
+const MARGINS = ' mt-1 mb-1';
+
 const TREE_ROOT_ID = "0";
 const EXIST_BASKET_CLASS_NAME = "btn btn-outline-success btn-sm ";
 const NEW_BASKET_CLASS_NAME = "btn btn-primary btn-sm ";
-const NAME_INPUT_CLASS_NAME = '';
+const NAME_INPUT_CLASS_NAME = 'v-center';
 const OK_INPUT_CLASS_NAME = '';
 const CANCEL_INPUT_CLASS_NAME = '';
 const ADD_BASKET_NAME = "СОЗДАТЬ";
@@ -55,7 +57,7 @@ const getBasketViewNode = (level, name, id, className, tip) => {
     level,
     name: truncateString(name, NAME_MAX_LENGTH),
     id,
-    className,
+    className: className + MARGINS,
     tip,
   }
 };

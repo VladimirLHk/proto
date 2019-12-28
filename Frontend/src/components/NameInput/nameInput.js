@@ -1,6 +1,7 @@
 import React from 'react'
 import $ from 'jquery';
 import Button from "../button/button";
+import './nameInput.css';
 
 // const NameInput = ({groupWrapClass, inputButton, okButton, cancelButton}) => {
 //   return (
@@ -36,6 +37,7 @@ class NameInput extends React.Component {
 
   render () {
     let {groupWrapClass, inputButton, okButton, cancelButton} = this.props;
+    console.log(inputButton);
     return (
       <div className={groupWrapClass}>
         <input
@@ -46,14 +48,16 @@ class NameInput extends React.Component {
         />
         <Button
           id={okButton.id}
-          className={okButton.className}
+          className={okButton.className ? okButton.className : " btn btn-success btn-sm mx-1"}
           onClick={okButton.onClick}
-          name={'OK'}/>
+          name={'OK'}
+        />
         <Button
           id={cancelButton.id}
-          className={cancelButton.className}
+          className={cancelButton.className ? cancelButton.className : " btn btn-danger btn-sm "}
           onClick={cancelButton.onClick}
-          name={'X'}/>
+          name={'X'}
+        />
       </div>
     )
   }

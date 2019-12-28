@@ -7,15 +7,17 @@ import basketsOperation from './basketsSetOperation';
 import currentStepNum from './goNext';
 import tagsOperations from './tagsOperations';
 import symbolsOperations from './symbolsOperations';
+import blocksOperations from './blocksOperations';
 
+//  currentText,
 
 export default combineReducers({
   buttonState,
-  currentText,
   lexicon,
   cursorIndex,
   currentStepNum,
   basketsOperation,
   tagsOperations,
   symbolsOperations,
+  blocksOperations,
 })

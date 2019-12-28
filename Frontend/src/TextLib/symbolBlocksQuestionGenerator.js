@@ -146,7 +146,7 @@ const getParamsAboutCurrentBasketAndTags = (questBlock) => {
   }
 }
 
-const symbolBlocksQuestionGenerator = ({blocks, basketsSet, currentBasketId, tagsSet, symbolsSet}) => {
+const symbolBlocksQuestionGenerator = ({blocks, basketsSet, currentBasketId, tagsSet, symbolsSet, skipped}) => {
   symbols_set = symbolsSet;
   baskets_set = basketsSet;
   current_basket_id = currentBasketId;
@@ -171,7 +171,7 @@ const symbolBlocksQuestionGenerator = ({blocks, basketsSet, currentBasketId, tag
     return accrued;
   }, {});
   if (!leader) {
-    return {question: [ALL_BLOCKS_CLASSIFIED]}
+    return {question: [ALL_BLOCKS_CLASSIFIED], noQuestion: true}
   }
   let questBlock = blocks.find(item => item.csId === leader.id);
   let {question = [], answers = [], actionsSet=[]} = getParamsAboutCurrentBasketAndTags(questBlock);
@@ -185,7 +185,6 @@ const symbolBlocksQuestionGenerator = ({blocks, basketsSet, currentBasketId, tag
       questParams = getParamsForNewSymbol(questBlock);
       break;
     case 2:
-      // questParams = getParamsForSingleClassSymbol(questBlock);
       questParams = getParamsForMultiClassSymbol(questBlock, KNOWN_SYMBOL_IN_ONE_BASKET);
       break;
     case 3:

@@ -17,7 +17,6 @@ const getSymbolBlocks = ({text = '', symbolsSet = [], isAutoApprove = symbol => 
     //     symbols: symbols[0]
     //   }
     // }
-    // return {csId, status, basketId}
     return {csId, status, symbols}
   });
 };
