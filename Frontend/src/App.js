@@ -36,6 +36,7 @@ class AppCard extends React.Component {
           }
         </div>
         <NoteSaveEditButton basketsOperation={basketsOperation} symbolsSet = {symbolsSet}/>
+        {isEdit && <MarkedTextBlockJumperGroup />}
         <Classifications/>
       </div>
     )
@@ -65,4 +66,3 @@ const App = connect(
 
 export default App;
 
-// {isEdit && <MarkedTextBlockJumperGroup />}

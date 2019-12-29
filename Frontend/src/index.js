@@ -10,6 +10,7 @@ import thunkMiddleware from 'redux-thunk';
 import complexReducer from "./Redux/reducers"
 import './index.css';
 import App from "./App";
+import Scroller from './scroller'
 
 let store = createStore(
   complexReducer,
@@ -22,3 +23,7 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'));
 
+// ReactDOM.render(
+//     <Scroller/>,
+//   document.getElementById('root'));
+//

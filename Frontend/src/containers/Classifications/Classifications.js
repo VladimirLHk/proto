@@ -119,7 +119,8 @@ const mapDispatchToProps = (dispatch) => {
         if (!newTagName) {
           return
         }
-        dispatch(tagAdd({newTagName}))
+        dispatch(tagAdd({newTagName}));
+        document.getElementById('newTagName').value = "";
       },
       cancelOnClick: ()=>{},
       changeTagStatus: (e)=>{

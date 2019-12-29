@@ -10,7 +10,7 @@ const TagsList = ({ title, tagsList, okOnClick=()=>{}, cancelOnClick=()=>{}, cha
         inputButton={{
           id: "newTagName",
           onInput: () => {},
-          placeholder: "Название признака",
+          placeholder: "Добавить признак",
           className:"v-center",
         }}
         okButton = {{
@@ -19,7 +19,7 @@ const TagsList = ({ title, tagsList, okOnClick=()=>{}, cancelOnClick=()=>{}, cha
           className: "",
         }}
         cancelButton = {{
-          id: "newTagCancel",
+          id: "",
           onClick: cancelOnClick,
           className: "",
         }}

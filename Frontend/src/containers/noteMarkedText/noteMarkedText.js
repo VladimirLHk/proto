@@ -73,16 +73,18 @@ const makeMultiLineMarkedText = textBlocks => {
 
 class MarkedText extends React.Component {
   componentDidMount() {
+    document.getElementById("NoteMarkedText").focus();
     this.scrollToCursor();
   }
 
   componentDidUpdate() {
+    document.getElementById("NoteMarkedText").focus();
     this.scrollToCursor();
   }
 
-  scrollToCursor() { //TODO Scroll не работает!!!
-    // let cursorElement = document.querySelector(cursorSelector).parentNode;
-    // cursorElement && cursorElement.scrollIntoView({ behavior: 'smooth',  block: "center" });
+  scrollToCursor() {
+    let cursorElement = document.querySelector(cursorSelector);
+    cursorElement && cursorElement.scrollIntoView({ behavior: 'smooth',  block: "center" });
   }
 
   render () {
@@ -92,7 +94,7 @@ class MarkedText extends React.Component {
     // let linedText = [textBlocks];
     let blockNum = -1;
     return (
-      <div className={className}>
+      <div className={className} id={"NoteMarkedText"}>
         <div>
           {linedText.map((line, index) => {
             return (
@@ -122,7 +124,7 @@ class MarkedText extends React.Component {
 const NoteMarkedText = connect(
   (state) =>
   {return {
-    textBlocks: state.blocksOperations.blocks, //state.currentText,
+    textBlocks: state.blocksOperations.blocks,
     cursorIndex: state.cursorIndex,
   }}
   )(MarkedText);
